@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lista de Tareas</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+
+    <h2>Mi Lista de Tareas</h2>
+
+    <form id="task-form">
+    <input type="text" id="task-input" placeholder="Agrega una nueva tarea aquí" required>
+    <button type="submit">Agregar Tarea</button>
+    </form>
+
+    <ul id="task-list" class="task-list"></ul>
+
+    <script>
+        function addTask(taskContent) {
+        const taskList = document.getElementById('task-list');
+        const taskItem = document.createElement('li');
+        
+        taskItem.textContent = taskContent;
+        
+        const completeButton = document.createElement('button');
+        completeButton.textContent = 'Completar';
+        completeButton.onclick = function() {
+            taskItem.classList.toggle('completed');
+        };
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Eliminar';
+        deleteButton.onclick = function() {
+            taskList.removeChild(taskItem);
+        };
+        
+        taskItem.appendChild(completeButton);
+        taskItem.appendChild(deleteButton);
+        
+        taskList.appendChild(taskItem);
+        }
+
+        document.getElementById('task-form').onsubmit = function(event) {
+        event.preventDefault();
+        
+        const taskInput = document.getElementById('task-input');
+        
+        addTask(taskInput.value);
+        
+        taskInput.value = ''; 
+        };
+
+    </script>
+
+</body>
+</html>
+
